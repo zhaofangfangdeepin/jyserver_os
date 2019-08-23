@@ -27,6 +27,7 @@ else
 	printf "Create a file with a file name length of 254 letters failed!\n"
 	exit 1
 fi
+rm -f $filename_254
 
 printf "Create a file with a file name length of 255 letters\n"
 create_file $filename_255
@@ -36,12 +37,14 @@ else
 	printf "Create a file with a file name length of 255 letters failed!\n"
 	exit 1
 fi
+rm -f $filename_255
 
 printf "Create a file with a file name length of 256 letters\n"
-create_file $filename_256
+create_file $filename_256 &> /dev/null
 if [ $? -eq 0 ];then
 	printf "Create a file with a file name length of 256 letters success!\n"
 	printf "This does not meet the standards!\n"
+	rm -f $filename_256
 	exit 1
 else
 	printf "Create a file with a file name length of 256 letters failed!\n"
